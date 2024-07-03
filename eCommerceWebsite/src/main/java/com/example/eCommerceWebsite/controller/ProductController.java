@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -19,6 +20,10 @@ public class ProductController {
     @PostMapping("/addproduct")
     public String saveProduct(@RequestBody Product product) throws ExecutionException, InterruptedException {
     return productService.saveProduct(product);
+    }
+    @PostMapping("/addMultipleProducts")
+    public String addMultipleProd(@RequestBody ArrayList<Product> productList){
+        return productService.saveMultipleProduct(productList);
     }
 
 }

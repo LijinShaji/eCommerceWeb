@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Product {
     private int productID;
     private String productName;
     private String description;
-    private int price;
+    private String price;
+    private Rating rating;
 }
