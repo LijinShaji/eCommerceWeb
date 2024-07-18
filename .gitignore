@@ -14,8 +14,7 @@ target/
 .sts4-cache
 
 #personal
-
-
+src/main/resources/ServiceAccountKey.json
 ### IntelliJ IDEA ###
 .idea
 *.iws

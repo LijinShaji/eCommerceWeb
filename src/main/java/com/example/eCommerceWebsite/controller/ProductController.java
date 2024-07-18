@@ -13,5 +13,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+@Autowired
+    ProductService productService;
 
 }
