@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.usersDTO;
+import com.example.eCommerceWebsite.dtos.usersDTO.usersDTO;
 import com.example.eCommerceWebsite.models.userModel.User;
 import org.springframework.http.ResponseEntity;
 

@@ -1,11 +1,9 @@
-package com.example.eCommerceWebsite.dtos;
+package com.example.eCommerceWebsite.dtos.usersDTO;
 
-import com.example.eCommerceWebsite.models.productModel.ProductCategory;
 import com.example.eCommerceWebsite.models.productModel.Product;
 import com.example.eCommerceWebsite.models.productModel.Review;
 import lombok.Data;
 
-import java.util.ArrayList;
 @Data
 public class FakeStoreProductDTO {
     private int id;

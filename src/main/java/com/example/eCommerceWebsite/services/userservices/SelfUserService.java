@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.usersDTO;
+import com.example.eCommerceWebsite.dtos.usersDTO.usersDTO;
 import com.example.eCommerceWebsite.models.userModel.Address;
 import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
@@ -24,7 +24,6 @@ public class SelfUserService implements UserService {
 
 
     public SelfUserService(UserRepository userRepository, AddressRepository addressRepository ) {
-        System.out.println("self user service intiated");
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
     }

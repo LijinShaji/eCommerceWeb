@@ -27,7 +27,7 @@ public class Review extends BaseModel {
     @OneToMany(mappedBy = "review")
     private Set<ProductMedia> reviewedMedia = new HashSet<>();
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name="product_id",referencedColumnName = "id")
     @JsonIgnore
     private Product product;
 

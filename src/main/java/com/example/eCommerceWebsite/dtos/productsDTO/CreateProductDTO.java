@@ -1,4 +1,4 @@
-package com.example.eCommerceWebsite.dtos;
+package com.example.eCommerceWebsite.dtos.productsDTO;
 
 import lombok.Data;
 
@@ -7,5 +7,6 @@ public class CreateProductDTO {
     private String title;
     private String description;
     private float price;
-    private String category;
+    private long categoryId;
+
 }

@@ -1,4 +1,4 @@
-package com.example.eCommerceWebsite.dtos;
+package com.example.eCommerceWebsite.dtos.usersDTO;
 
 import lombok.Data;
 

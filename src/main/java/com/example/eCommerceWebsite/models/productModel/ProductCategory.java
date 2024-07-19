@@ -14,6 +14,7 @@ public class ProductCategory extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
     private String categoryName;
+    private String categoryDescription;
     @OneToOne
     private ProductCategory parentCategory;
 }

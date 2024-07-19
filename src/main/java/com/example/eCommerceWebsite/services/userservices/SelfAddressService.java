@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.AddressDTO;
+import com.example.eCommerceWebsite.dtos.usersDTO.AddressDTO;
 import com.example.eCommerceWebsite.models.userModel.Address;
 import com.example.eCommerceWebsite.repository.usersRepo.AddressRepository;
 import org.springframework.stereotype.Service;
