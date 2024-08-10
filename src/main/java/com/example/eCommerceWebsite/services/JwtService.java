@@ -28,7 +28,7 @@ private Date extractExpiration(String token) {
 }
 public boolean isTokenValid(String token, UserDetails userDetails) {
     final String usernameFromtoken = extractUsername(token);
-    return usernameFromtoken.equals(userDetails.getUsername())&&isTokenExpired(token);
+    return usernameFromtoken.equals(userDetails.getUsername())&&!isTokenExpired(token);
 
 }
 public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

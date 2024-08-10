@@ -4,6 +4,7 @@ import com.example.eCommerceWebsite.dtos.usersDTO.UsersDTO;
 import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
 import com.example.eCommerceWebsite.services.userservices.UserService;
+import com.example.eCommerceWebsite.services.userservices.authenticationService.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -11,36 +12,20 @@ import org.springframework.web.bind.annotation.*;
 
 //
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/v1/users")
 public class UserController {
-    @Autowired
+ @Autowired
     UserService userService;
-    @PostMapping("")
-    public User createUser(@RequestBody User user) {
-        return userService.addNewUser(user);
-    }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        User user= userService.loginUser(username, password);
-        return getResponseEntity(user);
-    }
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UsersDTO user) {
-        return userService.registerNewUser(user);
-    }
     @GetMapping("/profile")
     public User getProfile(@RequestParam("id") Long id) {
         return userService.getUserById(id);
     }
-    @PutMapping("/passwordReset")
-    public User resetPassword(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
-        return userService.resetPassword(id,user.getNewPassword());
-    }
+
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
-        User user1=userService.updateUserById(id, user);
-        return getResponseEntity(user1);
+    public ResponseEntity<?> updateProfile(@RequestBody UsersDTO user,@RequestParam("id") Long id) {
+        System.out.println("Hi");
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
     private ResponseEntity<?> getResponseEntity(User user1) {

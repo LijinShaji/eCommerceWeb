@@ -6,6 +6,7 @@ import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
 import com.example.eCommerceWebsite.repository.usersRepo.AddressRepository;
 import com.example.eCommerceWebsite.repository.usersRepo.UserRepository;
+import com.example.eCommerceWebsite.services.userservices.authenticationService.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class SelfUserService implements UserService {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
 
+    @Autowired
+    AuthenticationService authenticationService;
 
 
     public SelfUserService(UserRepository userRepository, AddressRepository addressRepository ) {
@@ -66,8 +69,11 @@ public class SelfUserService implements UserService {
     }
 
     private static User getUser(UsersDTO userData) {
+        String name = userData.getFirstName() +
+                " " +
+                userData.getLastName();
         User user=new User();
-        user.setName(userData.getName());
+        user.setName(name);
         user.setPhoneNo(userData.getPhoneNumber());
         user.setUserName(userData.getUserName());
         user.setPassword(userData.getPassword());
@@ -98,19 +104,29 @@ public class SelfUserService implements UserService {
     }
 
     @Override
+    public User updateUser(UsersDTO usersDTO) {
+        String username= authenticationService.getCurrentUsername();
+        User user=userRepository.findByUserName(username);
+        return updateUser(usersDTO, user);
+    }
+
+    private User updateUser(UsersDTO usersDTO, User user) {
+        if(user!=null){
+            user.setName(usersDTO.getFirstName()+" "+usersDTO.getLastName());
+            user.setEmailId(usersDTO.getEmailId());
+            user.setPhoneNo(usersDTO.getPhoneNumber());
+            if(usersDTO.getAddress()!=null){
+                user.setAddress(saveAndUpdateAddresses(usersDTO.getAddress(),user));
+            }
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+    @Override
     public User updateUserById(Long id, UsersDTO usersDTO) {
         User user=userRepository.findById(id).orElse(null);
-       if(user!=null){
-           user.setName(usersDTO.getName());
-           user.setEmailId(usersDTO.getEmailId());
-           user.setPhoneNo(usersDTO.getPhoneNumber());
-           if(usersDTO.getAddress()!=null){
-               user.setAddress(saveAndUpdateAddresses(usersDTO.getAddress(),user));
-           }
-
-           return userRepository.save(user);
-       }
-        return null;
+        return updateUser(usersDTO, user);
     }
     public Set<Address> saveAndUpdateAddresses(Set<Address> addresses, User newUser) {
         Set<Address> newAddresses = new HashSet<>();

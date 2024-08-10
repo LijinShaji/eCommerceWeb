@@ -1,4 +1,4 @@
-package com.example.eCommerceWebsite.dtos.usersDTO;
+package com.example.eCommerceWebsite.dtos.authDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
     private String token;
-
 }

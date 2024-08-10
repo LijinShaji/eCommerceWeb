@@ -32,10 +32,6 @@ public class ProductController {
     return ResponseEntity.ok(newCategory);
 }
 
-@PostMapping("")
-    public ResponseEntity<ProductMediaMain> addProductMedia(@RequestBody ProductMediaMain productMedia) {
-    return null;
-    }
 @PutMapping("")
     public ResponseEntity<?> updateProduct(@RequestBody MainProductDTO product, @RequestParam("id") long id) {
    Product newProduct= productService.updateProduct(product,id);

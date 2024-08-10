@@ -11,5 +11,6 @@ ResponseEntity<?> registerNewUser(UsersDTO user);
 User loginUser(String username, String password);
 User resetPassword(Long id, String newPassword);
 User getUserById(Long id);
+User updateUser(UsersDTO user);
 User updateUserById(Long id, UsersDTO user);
 }

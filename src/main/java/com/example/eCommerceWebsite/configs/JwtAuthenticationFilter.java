@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,17 +47,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //Bearer token
         jwtToken = authHeader.substring(7);
         userName = jwtService.extractUsername(jwtToken);
+        System.out.println("Triggered from the call"+userName);
         if(Strings.isNotBlank(userName)&& SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails= userDetailsService.loadUserByUsername(userName);
-            if (jwtService.isTokenValid(jwtToken,userDetails)) {
+            boolean validToken=jwtService.isTokenValid(jwtToken,userDetails);
+            if (validToken) {
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            filterChain.doFilter(request, response);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                filterChain.doFilter(request, response);
+            }else{
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Token expired please use the right token");
             }
         }
 

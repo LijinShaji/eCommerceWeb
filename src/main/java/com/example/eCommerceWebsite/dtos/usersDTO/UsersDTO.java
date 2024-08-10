@@ -8,13 +8,13 @@ import java.util.Set;
 @Data
 public class UsersDTO {
     private String userName;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String emailId;
     private String password;
     private String phoneNumber;
     private String oldPassword;
     private String newPassword;
     private Role role;
-//    private List<Address> address;
     private Set<Address> address;
 }
