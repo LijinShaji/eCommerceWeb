@@ -33,7 +33,9 @@ public class PersistenceUserConfiguration extends CommonPersistenceConfiguration
     @Primary
     @Bean(name = "userEntityMangerFactoryBean")
     public LocalContainerEntityManagerFactoryBean productEntityManagerFactoryBean(){
-        return createEntityManagerFactory(userDataSource(), "com.example.eCommerceWebsite.models.userModel");
+        LocalContainerEntityManagerFactoryBean factoryBean= createEntityManagerFactory(userDataSource(), "com.example.eCommerceWebsite.models.userModel");
+        System.out.println(factoryBean);
+        return factoryBean;
     }
     @Bean(name = "userTransactionManager")
     @Primary

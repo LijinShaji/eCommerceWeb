@@ -20,7 +20,7 @@ public class SelfCategoryService implements CategoryService {
         this.prodCategoryRepository = prodCategoryRepository;
     }
     @Override
-    public ProductCategory findCategoryById(long id) {
+    public ProductCategory findCategoryById(Long id) {
         return prodCategoryRepository.findById(id).orElse(null);
     }
 

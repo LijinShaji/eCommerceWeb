@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.controller;
 
-import com.example.eCommerceWebsite.dtos.usersDTO.usersDTO;
+import com.example.eCommerceWebsite.dtos.usersDTO.UsersDTO;
 import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
 import com.example.eCommerceWebsite.services.userservices.UserService;
@@ -22,12 +22,11 @@ public class UserController {
 
     @GetMapping("/login")
     public ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-
         User user= userService.loginUser(username, password);
         return getResponseEntity(user);
     }
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody usersDTO user) {
+    public ResponseEntity<?> registerUser(@RequestBody UsersDTO user) {
         return userService.registerNewUser(user);
     }
     @GetMapping("/profile")
@@ -35,11 +34,11 @@ public class UserController {
         return userService.getUserById(id);
     }
     @PutMapping("/passwordReset")
-    public User resetPassword(@RequestBody usersDTO user, @RequestParam("id") Long id) {
+    public User resetPassword(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
         return userService.resetPassword(id,user.getNewPassword());
     }
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(@RequestBody usersDTO user, @RequestParam("id") Long id) {
+    public ResponseEntity<?> updateProfile(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
         User user1=userService.updateUserById(id, user);
         return getResponseEntity(user1);
     }

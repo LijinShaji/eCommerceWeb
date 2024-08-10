@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.usersDTO.usersDTO;
+import com.example.eCommerceWebsite.dtos.usersDTO.UsersDTO;
 import com.example.eCommerceWebsite.models.userModel.Address;
 import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
@@ -40,7 +40,7 @@ public class SelfUserService implements UserService {
         user.setName(user.getName());
         user.setPassword(user.getPassword());
 
-        newUser.setUserName(user.getUserName());
+        newUser.setUserName(user.getUsername());
         newUser.setEmailId(user.getEmailId());
         newUser.setPhoneNo(user.getPhoneNo());
         User userNew= userRepository.save(newUser);
@@ -52,7 +52,7 @@ public class SelfUserService implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> registerNewUser(usersDTO userData) {
+    public ResponseEntity<?> registerNewUser(UsersDTO userData) {
         if(getUser(userData.getUserName())!=null){
             ErrorResponseBody errorResponseBody = new ErrorResponseBody();
             errorResponseBody.setStatus(404);
@@ -65,7 +65,7 @@ public class SelfUserService implements UserService {
         }
     }
 
-    private static User getUser(usersDTO userData) {
+    private static User getUser(UsersDTO userData) {
         User user=new User();
         user.setName(userData.getName());
         user.setPhoneNo(userData.getPhoneNumber());
@@ -98,7 +98,7 @@ public class SelfUserService implements UserService {
     }
 
     @Override
-    public User updateUserById(Long id, usersDTO usersDTO) {
+    public User updateUserById(Long id, UsersDTO usersDTO) {
         User user=userRepository.findById(id).orElse(null);
        if(user!=null){
            user.setName(usersDTO.getName());
@@ -122,4 +122,6 @@ public class SelfUserService implements UserService {
         }
         return newAddresses;
     }
+
+
 }

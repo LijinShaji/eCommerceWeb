@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ public class Review extends BaseModel {
     private String comments;
     private int rating;
     @OneToMany(mappedBy = "review")
-    private Set<ProductMedia> reviewedMedia = new HashSet<>();
+    private Set<ProductMediaMain> reviewedMedia = new HashSet<>();
     @ManyToOne
     @JoinColumn(name="product_id",referencedColumnName = "id")
     @JsonIgnore

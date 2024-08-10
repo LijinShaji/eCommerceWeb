@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class ProductMedia extends BaseModel {
+public class ProductMediaMain extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

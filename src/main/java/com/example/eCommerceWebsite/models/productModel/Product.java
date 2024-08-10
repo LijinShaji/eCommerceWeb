@@ -23,7 +23,7 @@ public class Product extends BaseModel {
     private int overallRating;
     private String description;
     @OneToMany(mappedBy = "product")
-    private Set<Review> reviews = new HashSet<>();
+    public Set<Review> reviews = new HashSet<>();
     @OneToMany(mappedBy = "product")
-    private Set<ProductMedia> productMedia=new HashSet<>();
+    public Set<ProductMediaMain> productMedia=new HashSet<>();
 }

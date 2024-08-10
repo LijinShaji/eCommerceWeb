@@ -29,7 +29,7 @@ import java.util.Objects;
 )
 public class PersistenceProductConfiguration extends CommonPersistenceConfiguration{
 
-    @Bean(name="productDataSource")
+   @Bean(name="productDataSource")
 @Primary
     public DataSource productDataSource() {
         return createDataSource(
@@ -42,9 +42,11 @@ public class PersistenceProductConfiguration extends CommonPersistenceConfigurat
     @Primary
     @Bean(name = "productEntityMangerFactoryBean")
     public LocalContainerEntityManagerFactoryBean productEntityManagerFactoryBean(){
-        return createEntityManagerFactory(productDataSource(), "com.example.eCommerceWebsite.models.productModel");
+        LocalContainerEntityManagerFactoryBean factoryBean = createEntityManagerFactory(productDataSource(), "com/example/eCommerceWebsite/models/productModel");
+        System.out.println(factoryBean);
+        return factoryBean;
     }
-    @Bean(name = "productTransactionManager")
+   @Bean(name = "productTransactionManager")
     @Primary
     public PlatformTransactionManager productTransactionManager(){
         return createTransactionManager(productEntityManagerFactoryBean());

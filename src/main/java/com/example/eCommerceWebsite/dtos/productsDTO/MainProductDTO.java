@@ -3,7 +3,7 @@ package com.example.eCommerceWebsite.dtos.productsDTO;
 import lombok.Data;
 
 @Data
-public class CreateProductDTO {
+public class MainProductDTO {
     private String title;
     private String description;
     private float price;

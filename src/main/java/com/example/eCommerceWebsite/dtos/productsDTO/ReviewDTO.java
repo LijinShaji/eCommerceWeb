@@ -1,10 +1,7 @@
 package com.example.eCommerceWebsite.dtos.productsDTO;
 
 import com.example.eCommerceWebsite.models.productModel.Product;
-import com.example.eCommerceWebsite.models.productModel.ProductMedia;
-import com.example.eCommerceWebsite.models.productModel.Review;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import com.example.eCommerceWebsite.models.productModel.ProductMediaMain;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -16,6 +13,6 @@ public class ReviewDTO {
     private String title;
     private String comments;
     private int rating;
-    private Set<ProductMedia> reviewedMedia = new HashSet<>();
+    private Set<ProductMediaMain> reviewedMedia = new HashSet<>();
     private Product product;
 }

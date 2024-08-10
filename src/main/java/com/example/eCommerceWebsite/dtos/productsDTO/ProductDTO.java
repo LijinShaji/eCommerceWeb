@@ -1,14 +1,6 @@
 package com.example.eCommerceWebsite.dtos.productsDTO;
 
-import com.example.eCommerceWebsite.models.BaseModel;
-import com.example.eCommerceWebsite.models.productModel.ProductCategory;
-import com.example.eCommerceWebsite.models.productModel.ProductMedia;
-import com.example.eCommerceWebsite.models.productModel.Review;
-import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 public class ProductDTO {

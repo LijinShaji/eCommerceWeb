@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public interface CategoryService {
-    ProductCategory findCategoryById(long id);
+    ProductCategory findCategoryById(Long id);
     ProductCategory findCategoryByName(String name);
     HashSet<ProductCategory> findAllCategories();
     ProductCategory saveCategory(CreateCategoryDTO categoryDTO);
