@@ -1,5 +1,6 @@
 package com.example.eCommerceWebsite.configs;
 
+import com.example.eCommerceWebsite.models.userModel.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +22,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(
-                        auth->auth.requestMatchers("/api/v1/auth/*")
-                        .permitAll()
-                        .anyRequest()
+                        auth->auth.requestMatchers("/auth/*").permitAll()
+                                .requestMatchers("/users/**").hasAuthority(Role.USER.name())
+                                .requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+                                .anyRequest()
                         .authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

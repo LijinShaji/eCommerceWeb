@@ -1,11 +1,10 @@
-package com.example.eCommerceWebsite.controller;
+package com.example.eCommerceWebsite.controller.productControllers;
 
 import com.example.eCommerceWebsite.dtos.productsDTO.CreateCategoryDTO;
 import com.example.eCommerceWebsite.dtos.productsDTO.MainProductDTO;
 import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.productModel.Product;
 import com.example.eCommerceWebsite.models.productModel.ProductCategory;
-import com.example.eCommerceWebsite.models.productModel.ProductMediaMain;
 import com.example.eCommerceWebsite.services.productServices.CategoryService;
 import com.example.eCommerceWebsite.services.productServices.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
-public class ProductController {
+public class CustomerProductCont {
 @Autowired
     ProductService productService;
 @Autowired
