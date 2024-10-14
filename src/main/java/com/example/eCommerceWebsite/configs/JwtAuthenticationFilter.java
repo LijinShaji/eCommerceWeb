@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //Bearer token
         jwtToken = authHeader.substring(7);
         userName = jwtService.extractUsername(jwtToken);
-        System.out.println("Triggered from the call"+userName);
+        System.out.println("Triggered from the call "+userName);
         if(Strings.isNotBlank(userName)&& SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails= userDetailsService.loadUserByUsername(userName);
             boolean validToken=jwtService.isTokenValid(jwtToken,userDetails);
@@ -61,7 +61,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 filterChain.doFilter(request, response);
+                System.out.println("Successfully authenticated user "+userName);
             }else{
+                System.out.println("Invalid username or password");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write("Token expired please use the right token");
             }

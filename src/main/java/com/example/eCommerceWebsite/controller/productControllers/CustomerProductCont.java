@@ -8,12 +8,16 @@ import com.example.eCommerceWebsite.models.productModel.ProductCategory;
 import com.example.eCommerceWebsite.services.productServices.CategoryService;
 import com.example.eCommerceWebsite.services.productServices.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/prod")
 public class CustomerProductCont {
 @Autowired
     ProductService productService;
@@ -32,8 +36,27 @@ public class CustomerProductCont {
 }
 
 @PutMapping("")
+public ResponseEntity<Product> updateProduct(@RequestParam("id") Long id,@RequestBody MainProductDTO product) {
+    System.out.println("triggeredUpdateProduct");
+    return null;
+}
+@GetMapping("/all")
+public ResponseEntity<List<Product>> getAllProducts(
+        @RequestParam(value = "pagenNo",defaultValue = "0",required = false)int pageNo,
+        @RequestParam(value = "pageSize",defaultValue = "10",required = false)int pageSize) {
+    System.out.println("Inside all products");
+    return new ResponseEntity<>(productService.getAllProducts(pageNo,pageSize), HttpStatus.OK);
+}
+
+@GetMapping("/demo")
+public ResponseEntity<String> getDemoProducts() {
+    return new ResponseEntity<>("Working",HttpStatus.OK);
+}
+
+@PutMapping("/getProduct")
     public ResponseEntity<?> updateProduct(@RequestBody MainProductDTO product, @RequestParam("id") long id) {
-   Product newProduct= productService.updateProduct(product,id);
+   System.out.println("test234");
+    Product newProduct= productService.updateProduct(product,id);
    if(newProduct!=null){
        return ResponseEntity.ok(newProduct);
    }else{
@@ -60,5 +83,19 @@ public ResponseEntity<?> getProductById(@PathVariable("id") Long id) {
     }
 
 }
+@PostMapping("/multiProducts")
+    public ResponseEntity<?> addMultiProducts(@RequestBody List<MainProductDTO> productDTOList) {
+    List<Product> products=new ArrayList<>();
+    for(MainProductDTO productDTO:productDTOList){
+        Product product=new Product();
+        product.setTitle(productDTO.getTitle());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        products.add(product);
+    }
+    productService.addMultipleProducts(products);
+    return ResponseEntity.ok().body(products);
 }
+}
+
 

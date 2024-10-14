@@ -5,7 +5,12 @@ import com.example.eCommerceWebsite.models.productModel.Product;
 import com.example.eCommerceWebsite.models.productModel.ProductCategory;
 import com.example.eCommerceWebsite.repository.productRepo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SelfProductService implements ProductService {
@@ -51,4 +56,17 @@ public class SelfProductService implements ProductService {
     public Product getProduct(Long id) {
         return productRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void addMultipleProducts(List<Product> productDTOList) {
+       productRepository.saveAll(productDTOList);
+    }
+
+    @Override
+    public List<Product> getAllProducts(int pageNo, int pageSize) {
+        Pageable pageable= PageRequest.of(pageNo, pageSize);
+        Page<Product> products = productRepository.findAll(pageable);
+        return products.getContent();
+    }
+
 }

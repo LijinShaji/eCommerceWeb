@@ -34,39 +34,18 @@ public class SelfUserService implements UserService {
     public User getUser(String username) {
         return userRepository.findByUserName(username);
     }
-
     @Override
-    public User addNewUser(User user) {
-
-        User newUser = new User();
-        user.setUser_id(user.getUser_id());
-        user.setName(user.getName());
-        user.setPassword(user.getPassword());
-
-        newUser.setUserName(user.getUsername());
-        newUser.setEmailId(user.getEmailId());
-        newUser.setPhoneNo(user.getPhoneNo());
-        User userNew= userRepository.save(newUser);
-        if (user.getAddress() != null) {
-
-            newUser.setAddress(saveAndUpdateAddresses(user.getAddress(),newUser));
+    public UsersDTO getUsersDTO(String username) {
+        User user = getUser(username);
+        UsersDTO usersDTO = new UsersDTO();
+        if (user != null) {
+            usersDTO.setUserName(user.getUsername());
+            usersDTO.setEmailId(user.getEmailId());
+            usersDTO.setRole(user.getRole());
         }
-        return userNew;
+        return usersDTO;
     }
 
-    @Override
-    public ResponseEntity<?> registerNewUser(UsersDTO userData) {
-        if(getUser(userData.getUserName())!=null){
-            ErrorResponseBody errorResponseBody = new ErrorResponseBody();
-            errorResponseBody.setStatus(404);
-            errorResponseBody.setErrorMessage("User with same username already exists. Please login with this account or try again");
-             return new ResponseEntity<>(errorResponseBody,HttpStatusCode.valueOf(404));
-        }else{
-            User user = getUser(userData);
-            User newUser=userRepository.save(user);
-          return new ResponseEntity<>(newUser,HttpStatusCode.valueOf(201));
-        }
-    }
 
     private static User getUser(UsersDTO userData) {
         String name = userData.getFirstName() +
@@ -123,11 +102,7 @@ public class SelfUserService implements UserService {
         return null;
     }
 
-    @Override
-    public User updateUserById(Long id, UsersDTO usersDTO) {
-        User user=userRepository.findById(id).orElse(null);
-        return updateUser(usersDTO, user);
-    }
+
     public Set<Address> saveAndUpdateAddresses(Set<Address> addresses, User newUser) {
         Set<Address> newAddresses = new HashSet<>();
         for (Address address : addresses) {

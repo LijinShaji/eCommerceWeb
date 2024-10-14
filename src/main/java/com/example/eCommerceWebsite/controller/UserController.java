@@ -17,9 +17,14 @@ public class UserController {
  @Autowired
     UserService userService;
 
+//    @GetMapping("/profile")
+//    public User getProfile(@RequestParam("id") Long id) {
+//        return userService.getUserById(id);
+//    }
+
     @GetMapping("/profile")
-    public User getProfile(@RequestParam("id") Long id) {
-        return userService.getUserById(id);
+    public UsersDTO getUserProfile(@RequestParam("uname") String username) {
+        return userService.getUsersDTO(username);
     }
 
     @PutMapping("/profile")

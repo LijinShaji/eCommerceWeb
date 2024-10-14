@@ -27,10 +27,10 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
     }
-    @PutMapping("/passwordReset")
-    public User resetPassword(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
-        return null;
-    }
+//    @PutMapping("/passwordReset")
+//    public User resetPassword(@RequestBody UsersDTO user, @RequestParam("id") Long id) {
+//        return null;
+//    }
 
 
 }

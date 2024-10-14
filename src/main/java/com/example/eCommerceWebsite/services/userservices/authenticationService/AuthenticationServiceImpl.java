@@ -29,7 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(AuthenticationRequest authenticationRequest) {
-    var user=User.builder()
+        var user=User.builder()
             .userName(authenticationRequest.getUsername())
             .name(authenticationRequest.getUsername())
             .password(passwordEncoder.encode(authenticationRequest.getPassword()))
@@ -45,6 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public AuthenticationResponse authenticate(String username,String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
+        System.out.println("IN authenticate");
         var user=userRepository.findByUserName(username);
         if(user==null){
             throw new UsernameNotFoundException("Invalid username or password");
