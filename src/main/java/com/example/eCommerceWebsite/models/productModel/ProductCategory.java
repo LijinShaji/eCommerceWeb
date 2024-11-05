@@ -17,12 +17,14 @@ public class ProductCategory extends BaseModel {
     private Long categoryId;
     private String categoryName;
     private String categoryDescription;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "parent_category_id")
     private ProductCategory parentCategory;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "m2m_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+        )
     private Set<Product> products;
 }

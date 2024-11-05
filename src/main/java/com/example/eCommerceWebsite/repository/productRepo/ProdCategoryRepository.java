@@ -4,8 +4,11 @@ import com.example.eCommerceWebsite.models.productModel.Product;
 import com.example.eCommerceWebsite.models.productModel.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProdCategoryRepository extends JpaRepository<ProductCategory,Long> {
-
+    ProductCategory findByCategoryName(String categoryName);
+    ArrayList<ProductCategory> findByParentCategory(ProductCategory parentCategory);
+    ArrayList<ProductCategory> findByParentCategoryNull();
 }
