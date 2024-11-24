@@ -1,6 +1,8 @@
 package com.example.eCommerceWebsite.services.productServices;
 
+import com.example.eCommerceWebsite.dtos.commonDTO.ResponseDTO;
 import com.example.eCommerceWebsite.dtos.productsDTO.MainProductDTO;
+import com.example.eCommerceWebsite.dtos.productsDTO.ProductDTO;
 import com.example.eCommerceWebsite.models.productModel.Product;
 import com.example.eCommerceWebsite.models.productModel.ProductCategory;
 import com.example.eCommerceWebsite.repository.productRepo.ProductRepository;
@@ -23,48 +25,26 @@ public class SelfProductService implements ProductService {
     }
 
     @Override
-    public Product createProduct(MainProductDTO productDTO) {
-        Product product = new Product();
+    public ResponseDTO createProduct(ProductDTO productDTO) {
+        Product product=new Product();
         product.setTitle(productDTO.getTitle());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        ProductCategory category = categoryService.findCategoryById(productDTO.getCategoryId());
-        return productRepository.save(product);
+        productRepository.save(product);
+
+        ResponseDTO responseDTO=new ResponseDTO();
+        responseDTO.setMessage("Product created successfully");
+        return responseDTO;
     }
 
     @Override
-    public Product updateProduct(MainProductDTO productDTO, long id) {
-        Product product = productRepository.findById(id).orElse(null);
-        if(product!=null){
-            if(productDTO.getTitle()!=null){
-                product.setTitle(productDTO.getTitle());
-            }
-            if(productDTO.getDescription()!=null){
-                product.setDescription(productDTO.getDescription());
-            }
-           ProductCategory category= categoryService.findCategoryById(productDTO.getCategoryId());
-            if(category!=null){
-            }
-            return productRepository.save(product);
-        }
+    public ResponseDTO updateProduct(ProductDTO productDTO, long id) {
         return null;
     }
 
     @Override
-    public Product getProduct(Long id) {
-        return productRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void addMultipleProducts(List<Product> productDTOList) {
-       productRepository.saveAll(productDTOList);
-    }
-
-    @Override
-    public List<Product> getAllProducts(int pageNo, int pageSize) {
-        Pageable pageable= PageRequest.of(pageNo, pageSize);
-        Page<Product> products = productRepository.findAll(pageable);
-        return products.getContent();
+    public List<ProductDTO> getAllProducts() {
+        return List.of();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.controller;
 
-import com.example.eCommerceWebsite.dtos.commonDTO.PutResponseDTO;
+import com.example.eCommerceWebsite.dtos.commonDTO.ResponseDTO;
 import com.example.eCommerceWebsite.dtos.usersDTO.AddressDTO;
 import com.example.eCommerceWebsite.dtos.usersDTO.UsersDTO;
 import com.example.eCommerceWebsite.repository.usersRepo.AddressRepository;
@@ -26,7 +26,7 @@ public class UserController {
         return userService.getUsersDTO();
     }
     @PutMapping("/profile")
-    public PutResponseDTO updateCurrentLoggedInUserDetails(@RequestBody UsersDTO usersDTO) {
+    public ResponseDTO updateCurrentLoggedInUserDetails(@RequestBody UsersDTO usersDTO) {
         return userService.updateUserDetails(usersDTO);
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/address")
-    public PutResponseDTO addAddressUser(@RequestBody AddressDTO addressDTO) {
+    public ResponseDTO addAddressUser(@RequestBody AddressDTO addressDTO) {
         return addressService.saveAddress(addressDTO);
     }
 

@@ -1,21 +1,13 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.commonDTO.PutResponseDTO;
-import com.example.eCommerceWebsite.dtos.usersDTO.AddressDTO;
+import com.example.eCommerceWebsite.dtos.commonDTO.ResponseDTO;
 import com.example.eCommerceWebsite.dtos.usersDTO.UsersDTO;
-import com.example.eCommerceWebsite.models.userModel.Address;
-import com.example.eCommerceWebsite.models.ErrorResponseBody;
 import com.example.eCommerceWebsite.models.userModel.User;
 import com.example.eCommerceWebsite.repository.usersRepo.AddressRepository;
 import com.example.eCommerceWebsite.repository.usersRepo.UserRepository;
 import com.example.eCommerceWebsite.services.userservices.authenticationService.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class SelfUserService implements UserService {
@@ -54,8 +46,8 @@ public class SelfUserService implements UserService {
     }
 
     @Override
-    public PutResponseDTO updateUserDetails(UsersDTO usersDTO) {
-        PutResponseDTO putResponseDTO = new PutResponseDTO();
+    public ResponseDTO updateUserDetails(UsersDTO usersDTO) {
+        ResponseDTO putResponseDTO = new ResponseDTO();
         String username = authenticationService.getCurrentUsername();
         User user = userRepository.findByUserName(username);
         if(user == null) {

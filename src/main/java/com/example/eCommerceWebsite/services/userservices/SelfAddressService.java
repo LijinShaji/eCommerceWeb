@@ -1,6 +1,6 @@
 package com.example.eCommerceWebsite.services.userservices;
 
-import com.example.eCommerceWebsite.dtos.commonDTO.PutResponseDTO;
+import com.example.eCommerceWebsite.dtos.commonDTO.ResponseDTO;
 import com.example.eCommerceWebsite.dtos.usersDTO.AddressDTO;
 import com.example.eCommerceWebsite.models.userModel.Address;
 import com.example.eCommerceWebsite.models.userModel.User;
@@ -25,11 +25,11 @@ public class SelfAddressService implements AddressService {
     }
 
     @Override
-    public PutResponseDTO saveAddress(AddressDTO address) {
+    public ResponseDTO saveAddress(AddressDTO address) {
         String username=authenticationService.getCurrentUsername();
         User user=userRepository.findByUserName(username);
 
-        PutResponseDTO putResponseDTO = new PutResponseDTO();
+        ResponseDTO putResponseDTO = new ResponseDTO();
         if(user==null){
             putResponseDTO.setMessage("User not found");
             putResponseDTO.setCode(401);
