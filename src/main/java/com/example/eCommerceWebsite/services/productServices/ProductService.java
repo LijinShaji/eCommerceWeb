@@ -12,4 +12,6 @@ public interface ProductService {
     ResponseDTO createProduct(ProductDTO productDTO);
     ResponseDTO updateProduct(ProductDTO productDTO, long id);
     List<ProductDTO> getAllProducts();
+    List<Product> searchProducts(String searchText);
+    List<Product> getProductsByCategory(String category);
 }

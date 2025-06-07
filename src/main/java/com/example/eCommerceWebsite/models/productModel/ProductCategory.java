@@ -23,8 +23,8 @@ public class ProductCategory extends BaseModel {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "m2m_product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
         )
     private Set<Product> products;
 }
