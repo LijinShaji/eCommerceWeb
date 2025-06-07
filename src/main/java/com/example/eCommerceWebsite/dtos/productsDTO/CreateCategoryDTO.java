@@ -9,7 +9,6 @@ import java.util.Set;
 @Data
 public class CreateCategoryDTO {
     private String categoryName;
-//    private long parentCategory;
     private String parentCategoryName;
     private String categoryDescription;
 }
