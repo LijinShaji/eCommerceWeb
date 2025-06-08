@@ -9,6 +9,7 @@ import com.example.eCommerceWebsite.repository.productRepo.ProdCategoryRepositor
 import com.example.eCommerceWebsite.repository.productRepo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SelfProductService implements ProductService {
@@ -79,5 +81,30 @@ public class SelfProductService implements ProductService {
     public List<Product> getProductsByCategory(String category) {
         ProductCategory productCategory=categoryService.findCategoryByName(category);
         return productRepository.findByCategoryId(productCategory.getCategoryId());
+    }
+
+
+
+    @Override
+    public Page<ProductDTO> getPaginatedProducts(int page, int size) {
+        Page<Product> products = productRepository.findAll(PageRequest.of(page, size));
+
+        List<ProductDTO> dtoList = products.getContent().stream().map(product -> {
+            ProductDTO dto = new ProductDTO();
+            dto.setTitle(product.getTitle());
+            dto.setPrice(product.getPrice());
+            dto.setOverallRating(product.getOverallRating());
+            dto.setDescription(product.getDescription());
+            return dto;
+        }).collect(Collectors.toList());
+
+        return new PageImpl<>(dtoList, products.getPageable(), products.getTotalElements());
+    }
+    private ProductDTO convertProductToProductDTO(Product product) {
+        ProductDTO productDTO=new ProductDTO();
+        productDTO.setTitle(product.getTitle());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        return productDTO;
     }
 }
