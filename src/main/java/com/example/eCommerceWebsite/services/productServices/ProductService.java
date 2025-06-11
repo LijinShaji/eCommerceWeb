@@ -5,6 +5,7 @@ import com.example.eCommerceWebsite.dtos.productsDTO.MainProductDTO;
 import com.example.eCommerceWebsite.dtos.productsDTO.ProductDTO;
 import com.example.eCommerceWebsite.models.productModel.Product;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface ProductService {
     List<ProductDTO> getAllProducts();
     List<Product> searchProducts(String searchText);
     List<Product> getProductsByCategory(String category);
+    Page<ProductDTO> getPaginatedProducts(int page, int size);
 }
